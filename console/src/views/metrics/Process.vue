@@ -81,7 +81,6 @@ const fetchUptime = async () => {
 };
 
 const fetchPid = async () => {
-  console.log(await props.instance.hasEndpoint("env"));
   if (await props.instance.hasEndpoint("env")) {
     try {
       const response = await props.instance.fetchEnv("PID");

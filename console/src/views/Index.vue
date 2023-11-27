@@ -4,6 +4,7 @@ import Instance from "@/services/instance";
 import DetailsGc from "./metrics/GC.vue";
 import Memory from "./metrics/Memory.vue";
 import Process from "./metrics/Process.vue";
+import Threads from "./metrics/Threads.vue";
 import { VPageHeader } from "@halo-dev/components";
 
 const instance = ref(new Instance())
@@ -18,5 +19,6 @@ const instance = ref(new Instance())
       <Memory :instance="instance" type="heap"></Memory>
       <Memory :instance="instance" type="nonheap"></Memory>
     </div>
+    <Threads :instance="instance"></Threads>
   </div>
 </template>
