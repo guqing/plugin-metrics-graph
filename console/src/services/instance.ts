@@ -1,29 +1,23 @@
-import axios, { type AxiosInstance } from 'axios';
-import { Observable, concat, from, ignoreElements } from 'rxjs';
-import uri from '@/utils/uri';
-import waitForPolyfill from '../utils/eventsource-polyfill';
+import axios, { type AxiosInstance } from "axios";
+import uri from "@/utils/uri";
 
 const actuatorMimeTypes = [
-  'application/vnd.spring-boot.actuator.v2+json',
-  'application/vnd.spring-boot.actuator.v1+json',
-  'application/json',
-].join(',');
+  "application/vnd.spring-boot.actuator.v2+json",
+  "application/vnd.spring-boot.actuator.v1+json",
+  "application/json",
+].join(",");
 
 const baseUrl = () => {
-  const href = window.location.href
-  return href.substring(0, href.indexOf('/console'))
-}
+  const href = window.location.href;
+  return href.substring(0, href.indexOf("/console"));
+};
 
 class Instance {
+  public endpointInitialized: boolean = false;
   public endpoints: any[] = [];
-  public tags: { [key: string]: string }[];
-  public statusTimestamp: string;
-  public buildVersion: string;
-  public statusInfo: StatusInfo;
   private readonly axios: AxiosInstance;
 
-  constructor({...instance }) {
-    Object.assign(this, instance);
+  constructor() {
     this.axios = axios.create({
       withCredentials: true,
       baseURL: baseUrl(),
@@ -31,41 +25,17 @@ class Instance {
     });
   }
 
-  static async fetchEvents() {
-    return axios.get(uri`instances/events`, {
-      headers: { Accept: 'application/json' },
-    });
-  }
-
-  static getEventStream() {
-    return concat(
-      from(waitForPolyfill()).pipe(ignoreElements()),
-      Observable.create((observer) => {
-        const eventSource = new EventSource('instances/events');
-        eventSource.onmessage = (message) =>
-          observer.next({
-            ...message,
-            data: JSON.parse(message.data),
-          });
-        eventSource.onerror = (err) => observer.error(err);
-        return () => {
-          eventSource.close();
-        };
-      }),
-    );
-  }
-
-  static async get(id) {
-    return axios.get(uri`instances/${id}`, {
-      headers: { Accept: 'application/json' },
-      transformResponse(data) {
-        if (!data) {
-          return data;
+  async detectEndpoints() {
+    const response = await this.axios.get(uri`actuator`);
+    var res = response.data;
+    this.endpoints = Object.entries(res["_links"]).map(
+      ([endpoint, link]) => {
+        return {
+          id: endpoint,
+          link: link
         }
-        const instance = JSON.parse(data);
-        return new Instance(instance);
-      },
-    });
+      }
+    );
   }
 
   static _toMBeans(data) {
@@ -82,11 +52,10 @@ class Instance {
     }));
   }
 
-  getId() {
-    return this.id;
-  }
-
-  hasEndpoint(endpointId) {
+  async hasEndpoint(endpointId: string) {
+    if (!this.endpointInitialized) {
+      await this.detectEndpoints();
+    }
     return this.endpoints.some((endpoint) => endpoint.id === endpointId);
   }
 
@@ -98,21 +67,21 @@ class Instance {
     return this.axios.get(uri`actuator/metrics`);
   }
 
-  async fetchMetric(metric:string, tags?: { [key: string]: string }) {
+  async fetchMetric(metric: string, tags?: { [key: string]: string }) {
     const params = new URLSearchParams();
     if (tags) {
       let firstElementDuplicated = false;
       Object.entries(tags)
-        .filter(([, value]) => typeof value !== 'undefined' && value !== null)
+        .filter(([, value]) => typeof value !== "undefined" && value !== null)
         .forEach(([name, value]) => {
-          params.append('tag', `${name}:${value}`);
+          params.append("tag", `${name}:${value}`);
 
           if (!firstElementDuplicated) {
             // workaround for tags that contains comma
             // take a look at https://github.com/spring-projects/spring-framework/issues/23820#issuecomment-543087878
             // If there is single tag specified and name or value contains comma then it will be incorrectly split into several parts
             // To bypass it we duplicate first tag.
-            params.append('tag', `${name}:${value}`);
+            params.append("tag", `${name}:${value}`);
             firstElementDuplicated = true;
           }
         });
@@ -133,7 +102,7 @@ class Instance {
   }
 
   async fetchEnv(name) {
-    return this.axios.get(uri`actuator/env/${name || ''}`);
+    return this.axios.get(uri`actuator/env/${name || ""}`);
   }
 
   async fetchConfigprops() {
@@ -143,7 +112,7 @@ class Instance {
   async hasEnvManagerSupport() {
     const response = await this.axios.options(uri`actuator/env`);
     return (
-      response.headers['allow'] && response.headers['allow'].includes('POST')
+      response.headers["allow"] && response.headers["allow"].includes("POST")
     );
   }
 
@@ -156,8 +125,8 @@ class Instance {
       uri`actuator/env`,
       { name, value },
       {
-        headers: { 'Content-Type': 'application/json' },
-      },
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 
@@ -179,7 +148,7 @@ class Instance {
 
   async addGatewayRoute(route) {
     return this.axios.post(uri`actuator/gateway/routes/${route.id}`, route, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
     });
   }
 
@@ -222,8 +191,8 @@ class Instance {
       uri`actuator/loggers/${name}`,
       level === null ? {} : { configuredLevel: level },
       {
-        headers: { 'Content-Type': 'application/json' },
-      },
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 
@@ -245,10 +214,10 @@ class Instance {
 
   async downloadThreaddump() {
     const res = await this.axios.get(uri`actuator/threaddump`, {
-      headers: { Accept: 'text/plain' },
+      headers: { Accept: "text/plain" },
     });
-    const blob = new Blob([res.data], { type: 'text/plain;charset=utf-8' });
-    saveAs(blob, this.registration.name + '-threaddump.txt');
+    const blob = new Blob([res.data], { type: "text/plain;charset=utf-8" });
+    saveAs(blob, this.registration.name + "-threaddump.txt");
   }
 
   async fetchAuditevents({ after, type, principal }) {
@@ -281,7 +250,7 @@ class Instance {
     const optionsResponse = await this.axios.options(uri`actuator/startup`);
     if (
       optionsResponse.headers.allow &&
-      optionsResponse.headers.allow.includes('GET')
+      optionsResponse.headers.allow.includes("GET")
     ) {
       return this.axios.get(uri`actuator/startup`);
     }
@@ -292,13 +261,13 @@ class Instance {
   streamLogfile(interval) {
     return logtail(
       (opt) => this.axios.get(uri`actuator/logfile`, opt),
-      interval,
+      interval
     );
   }
 
   async listMBeans() {
     return this.axios.get(uri`actuator/jolokia/list`, {
-      headers: { Accept: 'application/json' },
+      headers: { Accept: "application/json" },
       params: { canonicalNaming: false },
       transformResponse: Instance._toMBeans,
     });
@@ -306,44 +275,44 @@ class Instance {
 
   async readMBeanAttributes(domain, mBean) {
     const body = {
-      type: 'read',
+      type: "read",
       mbean: `${domain}:${mBean}`,
       config: { ignoreErrors: true },
     };
     return this.axios.post(uri`actuator/jolokia`, body, {
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     });
   }
 
   async writeMBeanAttribute(domain, mBean, attribute, value) {
     const body = {
-      type: 'write',
+      type: "write",
       mbean: `${domain}:${mBean}`,
       attribute,
       value,
     };
     return this.axios.post(uri`actuator/jolokia`, body, {
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     });
   }
 
   async invokeMBeanOperation(domain, mBean, operation, args) {
     const body = {
-      type: 'exec',
+      type: "exec",
       mbean: `${domain}:${mBean}`,
       operation,
       arguments: args,
     };
     return this.axios.post(uri`actuator/jolokia`, body, {
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
     });
   }
@@ -354,25 +323,25 @@ class Instance {
 
   async fetchQuartzJobs() {
     return this.axios.get(uri`actuator/quartz/jobs`, {
-      headers: { Accept: 'application/json' },
+      headers: { Accept: "application/json" },
     });
   }
 
   async fetchQuartzJob(group, name) {
     return this.axios.get(uri`actuator/quartz/jobs/${group}/${name}`, {
-      headers: { Accept: 'application/json' },
+      headers: { Accept: "application/json" },
     });
   }
 
   async fetchQuartzTriggers() {
     return this.axios.get(uri`actuator/quartz/triggers`, {
-      headers: { Accept: 'application/json' },
+      headers: { Accept: "application/json" },
     });
   }
 
   async fetchQuartzTrigger(group, name) {
     return this.axios.get(uri`actuator/quartz/triggers/${group}/${name}`, {
-      headers: { Accept: 'application/json' },
+      headers: { Accept: "application/json" },
     });
   }
 
@@ -386,17 +355,3 @@ class Instance {
 }
 
 export default Instance;
-
-export type Registration = {
-  name: string;
-  managementUrl?: string;
-  healthUrl: string;
-  serviceUrl?: string;
-  source: string;
-  metadata?: { [key: string]: string }[];
-};
-
-type StatusInfo = {
-  status: string;
-  details: { [key: string]: string };
-};
