@@ -74,7 +74,7 @@ useSubscription(createSubscription);
 <template>
   <VCard v-if="state.hasLoaded" title="R2DBC 数据源">
     <div class="pmg-grid pmg-grid-cols-8 pmg-gap-4">
-      <div v-if="state.current" class="level datasource-current pmg-col-span-2">
+      <div v-if="state.current" class="level datasource-current pmg-col-span-2 pmg-grid pmg-grid-rows-5 pmg-grid-flow-col gap-4">
         <div class="level-item has-text-centered">
           <div>
             <p class="heading has-bullet has-bullet-info">活动连接数</p>

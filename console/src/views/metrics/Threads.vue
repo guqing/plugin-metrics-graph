@@ -7,7 +7,7 @@ import { useSubscription } from "@/composables/subscribing";
 import moment from "moment";
 import type { Ref } from "vue";
 
-import ThreadsChart from './chart/Threads.vue';
+import ThreadsChart from "./chart/Threads.vue";
 
 type ThreadInfo = {
   live: number;
@@ -26,7 +26,7 @@ const state = reactive({
   current: {} as ThreadInfo,
 });
 
-const chartData:Ref<Array<ThreadInfo>> = ref([]);
+const chartData: Ref<Array<ThreadInfo>> = ref([]);
 
 const fetchMetrics = async () => {
   const responseLive = props.instance.fetchMetric("jvm.threads.live");
@@ -66,21 +66,25 @@ useSubscription(createSubscription);
 </script>
 <template>
   <VCard v-if="state.hasLoaded" title="线程">
-    <div v-if="state.current" class="flex w-full">
-      <div class="flex-1 text-center">
-        <p class="font-bold">活动线程</p>
-        <p v-text="state.current.live" />
+    <div class="pmg-grid pmg-grid-cols-8 pmg-gap-4">
+      <div v-if="state.current" class="pmg-col-span-2 pmg-grid pmg-grid-rows-5 pmg-grid-flow-col gap-4">
+        <div>
+          <p>活动线程</p>
+          <p v-text="state.current.live" />
+        </div>
+        <div>
+          <p>守护线程</p>
+          <p v-text="state.current.daemon" />
+        </div>
+        <div>
+          <p>线程峰值</p>
+          <p v-text="state.current.peak" />
+        </div>
       </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">守护线程</p>
-        <p v-text="state.current.daemon" />
-      </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">线程峰值</p>
-        <p v-text="state.current.peak" />
+
+      <div class="pmg-col-span-6">
+        <ThreadsChart v-if="chartData.length > 0" :data="chartData" />
       </div>
     </div>
-
-    <ThreadsChart v-if="chartData.length > 0" :data="chartData" />
   </VCard>
 </template>
