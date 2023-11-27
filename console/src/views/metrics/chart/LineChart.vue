@@ -34,6 +34,22 @@ const colorsRef = ref([
     borderColor: "rgb(0, 209, 178)",
     backgroundColor: "rgba(0, 209, 178, .1)",
   },
+  {
+    borderColor: "rgb(255, 159, 64)",
+    backgroundColor: "rgba(255, 159, 64, .1)",
+  },
+  {
+    borderColor: "rgb(255, 99, 132)",
+    backgroundColor: "rgba(255, 99, 132, .1)",
+  },
+  {
+    borderColor: "rgb(153, 102, 255)",
+    backgroundColor: "rgba(153, 102, 255, .1)",
+  },
+  {
+    borderColor: "rgb(201, 203, 207)",
+    backgroundColor: "rgba(201, 203, 207, .1)",
+  },
 ]);
 
 watch(
