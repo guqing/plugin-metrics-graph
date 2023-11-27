@@ -18,7 +18,7 @@ export default definePlugin({
           searchable: true,
           menu: {
             name: "指标监控",
-            group: "工具",
+            group: "tool",
             icon: markRaw(MaterialSymbolsAreaChartOutlineRounded),
             priority: 0,
           },
