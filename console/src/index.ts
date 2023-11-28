@@ -14,7 +14,8 @@ export default definePlugin({
         name: "Metrics",
         component: IndexView,
         meta: {
-          title: "MetricsInsight",
+          title: "指标监控",
+          permissions: ["system:actuator:manage"],
           searchable: true,
           menu: {
             name: "指标监控",
