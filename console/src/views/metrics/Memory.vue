@@ -5,7 +5,7 @@ import { concatMap, timer } from "rxjs";
 import { map, retry } from "rxjs/operators";
 
 import { VCard } from "@halo-dev/components";
-import { useSubscription } from "@/composables/subscribing";
+import { useSubscription } from "@/composables/subscription";
 import Instance from "@/services/instance";
 import MemChart from "./chart/MemChart.vue";
 import { computed, ref } from "vue";

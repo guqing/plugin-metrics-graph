@@ -3,7 +3,7 @@ import { reactive, ref } from "vue";
 import { VCard } from "@halo-dev/components";
 import Instance from "@/services/instance";
 import { concatMap, retry, timer } from "rxjs";
-import { useSubscription } from "@/composables/subscribing";
+import { useSubscription } from "@/composables/subscription";
 import moment from "moment";
 import type { Ref } from "vue";
 

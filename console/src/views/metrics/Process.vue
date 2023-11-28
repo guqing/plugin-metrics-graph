@@ -4,7 +4,7 @@ import { VCard } from "@halo-dev/components";
 import Instance from "@/services/instance";
 import { concatMap, retry, timer } from "rxjs";
 import { toMillis } from "@/utils/moment";
-import { useSubscription } from "@/composables/subscribing";
+import { useSubscription } from "@/composables/subscription";
 import moment from "moment";
 
 var props = defineProps({

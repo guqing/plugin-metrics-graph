@@ -4,7 +4,7 @@ import { concatMap, timer } from "rxjs";
 import { retry } from "rxjs/operators";
 
 import { VCard } from "@halo-dev/components";
-import { useSubscription } from "@/composables/subscribing";
+import { useSubscription } from "@/composables/subscription";
 import Instance from "@/services/instance";
 import R2dbcSoruceChart from "./chart/R2dbcSource.vue";
 import { reactive, ref } from "vue";

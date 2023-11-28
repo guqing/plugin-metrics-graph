@@ -3,7 +3,7 @@ import { VCard } from "@halo-dev/components";
 import moment from "moment";
 import { retry } from "rxjs/operators";
 
-import { useSubscription } from "@/composables/subscribing";
+import { useSubscription } from "@/composables/subscription";
 import Instance from "@/services/instance";
 import { concatMap, timer } from "@/utils/rxjs";
 import { toMillis } from "@/utils/moment";
