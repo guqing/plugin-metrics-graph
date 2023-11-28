@@ -1,45 +1,19 @@
-# plugin-starter
+# Metrics Graph
 
-Halo 2.0 插件开发快速开始模板。
+适用于 Halo 2.x 的插件为 Metrics 指标数据提供可视化展示，包括：
+- 垃圾回收
+- 进程
+- 内存
+- 线程
+- R2DBC 数据源
 
-## 开发环境
+![预览](./docs/assets/plugin-metrics-graph-cover.png)
 
-插件开发的详细文档请查阅：<https://docs.halo.run/developer-guide/plugin/hello-world>
+## 安装
+点击到 Halo 应用市场安装插件 [plugin-metrics-graph](https://www.halo.run/store/apps/app-ZZvZq)
 
-```bash
-git clone git@github.com:halo-sigs/plugin-starter.git
+## 贡献
 
-# 或者当你 fork 之后
+如果你有好的意见或建议，欢迎给我们提 [issue](https://github.com/guqing/plugin-metrics-graph/issues)
 
-git clone git@github.com:{your_github_id}/plugin-starter.git
-```
-
-```bash
-cd path/to/plugin-starter
-```
-
-```bash
-# macOS / Linux
-./gradlew pnpmInstall
-
-# Windows
-./gradlew.bat pnpmInstall
-```
-
-```bash
-# macOS / Linux
-./gradlew build
-
-# Windows
-./gradlew.bat build
-```
-
-修改 Halo 配置文件：
-
-```yaml
-halo:
-  plugin:
-    runtime-mode: development
-    fixedPluginPath:
-      - "/path/to/plugin-starter"
-```
+插件的开发文档请参考 [Plugin Development Guide](https://docs.halo.run/developer-guide/plugin/introduction)
