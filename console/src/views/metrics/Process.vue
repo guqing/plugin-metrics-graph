@@ -27,7 +27,6 @@ onMounted(async () => {
   await fetchPid();
   await fetchUptime();
   await fetchCpuCount();
-  console.log(toMillis(data.uptime.value, data.uptime.baseUnit));
 });
 
 const formatUptime = (millis: number) => {
@@ -85,7 +84,6 @@ const fetchPid = async () => {
     try {
       const response = await props.instance.fetchEnv("PID");
       data.pid = response.data.property.value;
-      console.log(response);
     } catch (error) {
       console.warn("Fetching PID failed:", error);
     } finally {
