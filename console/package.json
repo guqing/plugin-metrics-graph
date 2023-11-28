@@ -1,6 +1,6 @@
 {
-  "name": "@halo-dev/plugin-starter",
-  "version": "1.0.0",
+  "name": "@guching/plugin-metrics-graph",
+  "version": "1.0.0-beta.1",
   "private": true,
   "scripts": {
     "dev": "vite build --watch --mode=development",
