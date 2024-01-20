@@ -2,13 +2,13 @@ import { definePlugin } from "@halo-dev/console-shared";
 import IndexView from "./views/Index.vue";
 import { markRaw } from "vue";
 import "./styles/tailwind.css";
-import MaterialSymbolsAreaChartOutlineRounded from '~icons/material-symbols/area-chart-outline-rounded';
+import MaterialSymbolsAreaChartOutlineRounded from "~icons/material-symbols/area-chart-outline-rounded";
 
 export default definePlugin({
   components: {},
   routes: [
     {
-      parentName: "Root",
+      parentName: "OverviewRoot",
       route: {
         path: "/metrics",
         name: "Metrics",
@@ -19,7 +19,6 @@ export default definePlugin({
           searchable: true,
           menu: {
             name: "指标监控",
-            group: "tool",
             icon: markRaw(MaterialSymbolsAreaChartOutlineRounded),
             priority: 0,
           },
