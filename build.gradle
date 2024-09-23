@@ -31,7 +31,7 @@ node {
     nodeProjectDir = file("${project.projectDir}/console")
 }
 
-tasks.register('installFrontend', NpmTask) {
+tasks.register('installFrontend', PnpmTask) {
     args = ['install']
 }
 
