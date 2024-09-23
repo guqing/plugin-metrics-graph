@@ -44,11 +44,11 @@ const metrics = computed(() => {
     },
     {
       label: "进程CPU使用率",
-      value: data.processCpuLoad?.toFixed(2),
+      value: (data.processCpuLoad?.valueOf() * 100).toFixed(2) + "%",
     },
     {
       label: "系统CPU使用率",
-      value: data.systemCpuLoad?.toFixed(2),
+      value: (data.systemCpuLoad?.valueOf() * 100).toFixed(2) + "%",
     },
     {
       label: "CPU核心数",
