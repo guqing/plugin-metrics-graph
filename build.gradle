@@ -31,15 +31,19 @@ node {
     nodeProjectDir = file("${project.projectDir}/console")
 }
 
-task buildFrontend(type: PnpmTask) {
-    args = ['build']
+tasks.register('installFrontend', NpmTask) {
+    args = ['install']
 }
 
-build {
-    // build frontend before build
-    tasks.getByName('compileJava').dependsOn('buildFrontend')
+tasks.register('buildFrontend', PnpmTask) {
+    args = ['build']
+    dependsOn 'installFrontend'
+}
+
+tasks.named('compileJava').configure {
+    dependsOn 'buildFrontend'
 }
 
 halo {
-    version = '2.11.0-rc.1'
+    version = '2.19'
 }

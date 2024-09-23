@@ -11,7 +11,9 @@ spec:
     name: guqing
     website: https://github.com/guqing
   logo: logo.svg
-  homepage: https://github.com/guqing/plugin-metrics-graph
+  repo: https://github.com/guqing/plugin-metrics-graph
+  issues: https://github.com/guqing/plugin-metrics-graph/issues
+  homepage: https://www.halo.run/store/apps/app-ZZvZq
   displayName: "Metrics Graph"
   description: "为 Metrics 指标数据提供可视化以便更好的观测 Halo 的运行状态"
   license:
