@@ -7,7 +7,7 @@ import { toMillis } from "@/utils/moment";
 import { useSubscription } from "@/composables/subscription";
 import moment from "moment";
 
-var props = defineProps({
+const props = defineProps({
   instance: Instance,
 });
 
@@ -150,9 +150,9 @@ useSubscription(createSubscription);
 </script>
 <template>
   <VCard v-if="hasLoadedRef" title="进程">
-    <div class="grid grid-cols-3 gap-4">
-      <div class="text-center" v-for="item in metrics" :key="item.label">
-        <p class="font-bold" v-text="item.label"></p>
+    <div class=":uno: grid grid-cols-3 gap-4">
+      <div v-for="item in metrics" :key="item.label" class=":uno: text-center">
+        <p class=":uno: font-bold" v-text="item.label"></p>
         <p v-text="item.value" />
       </div>
     </div>

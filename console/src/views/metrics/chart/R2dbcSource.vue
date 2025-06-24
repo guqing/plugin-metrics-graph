@@ -15,14 +15,14 @@ const datasets = ref({
     label: "连接总数",
   },
   idle: {
-    label: "空闲连接数"
+    label: "空闲连接数",
   },
   maxAllocated: {
-    label: "最大连接数"
+    label: "最大连接数",
   },
   pending: {
-    label: "当前挂起数"
-  }
+    label: "当前挂起数",
+  },
 });
 
 const config = reactive({

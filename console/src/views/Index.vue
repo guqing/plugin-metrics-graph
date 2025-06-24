@@ -7,20 +7,25 @@ import Process from "./metrics/Process.vue";
 import Threads from "./metrics/Threads.vue";
 import R2dbcSource from "./metrics/R2dbcSource.vue";
 import { VPageHeader } from "@halo-dev/components";
+import MaterialSymbolsAreaChartOutlineRounded from "~icons/material-symbols/area-chart-outline-rounded";
 
 const instance = ref(new Instance());
 </script>
 
 <template>
-  <VPageHeader title="指标监控"> </VPageHeader>
-  <div class="grid grid-cols-1 gap-4 md-0 md:m-4">
+  <VPageHeader title="指标监控">
+    <template #icon>
+      <MaterialSymbolsAreaChartOutlineRounded />
+    </template>
+  </VPageHeader>
+  <div class=":uno: md-0 grid grid-cols-1 gap-4 md:m-4">
     <DetailsGc :instance="instance"></DetailsGc>
     <Process :instance="instance"></Process>
-    <div class="grid sm:grid-cols-1 gap-2 md:grid-cols-2">
+    <div class=":uno: grid gap-2 md:grid-cols-2 sm:grid-cols-1">
       <Memory :instance="instance" type="heap"></Memory>
       <Memory :instance="instance" type="nonheap"></Memory>
     </div>
-    <div class="grid sm:grid-cols-1 gap-2 md:grid-cols-2">
+    <div class=":uno: grid gap-2 md:grid-cols-2 sm:grid-cols-1">
       <Threads :instance="instance"></Threads>
       <R2dbcSource :instance="instance"></R2dbcSource>
     </div>

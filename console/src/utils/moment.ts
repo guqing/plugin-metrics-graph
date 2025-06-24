@@ -1,12 +1,12 @@
 export const toMillis = (value, baseUnit) => {
   switch (baseUnit) {
-    case 'nanoseconds':
+    case "nanoseconds":
       return value / 1000000;
-    case 'microseconds':
+    case "microseconds":
       return value / 1000;
-    case 'milliseconds':
+    case "milliseconds":
       return value;
-    case 'seconds':
+    case "seconds":
     default:
       return value * 1000;
   }

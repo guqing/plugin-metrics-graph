@@ -16,7 +16,7 @@ type ThreadInfo = {
   timestamp?: number | undefined;
 };
 
-var props = defineProps({
+const props = defineProps({
   instance: Instance,
 });
 
@@ -66,8 +66,11 @@ useSubscription(createSubscription);
 </script>
 <template>
   <VCard v-if="state.hasLoaded" title="线程">
-    <div class="pmg-grid pmg-grid-cols-8 pmg-gap-4">
-      <div v-if="state.current" class="pmg-col-span-2 pmg-grid pmg-grid-rows-5 pmg-grid-flow-col gap-4">
+    <div class=":uno: grid grid-cols-8 gap-4">
+      <div
+        v-if="state.current"
+        class=":uno: col-span-2 grid grid-rows-5 grid-flow-col gap-4"
+      >
         <div>
           <p>活动线程</p>
           <p v-text="state.current.live" />
@@ -82,7 +85,7 @@ useSubscription(createSubscription);
         </div>
       </div>
 
-      <div class="pmg-col-span-6">
+      <div class=":uno: col-span-6">
         <ThreadsChart v-if="chartData.length > 0" :data="chartData" />
       </div>
     </div>

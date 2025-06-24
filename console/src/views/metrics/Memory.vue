@@ -59,11 +59,13 @@ const createSubscription = () => {
         delay: 1000,
       })
     )
-    .pipe(map(obj => {
-      return Object.entries(obj)
-      .filter(([key, value]) => value !== undefined)
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {})
-    }))
+    .pipe(
+      map((obj) => {
+        return Object.entries(obj)
+          .filter(([key, value]) => value !== undefined)
+          .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+      })
+    )
     .subscribe({
       next: (data) => {
         hasLoaded.value = true;
@@ -93,26 +95,30 @@ const name = computed(() => {
 </script>
 <template>
   <VCard v-if="hasLoaded" :title="'内存: ' + name">
-    <div v-if="current" class="flex w-full">
-      <div v-if="current.metaspace" class="flex-1 text-center">
-        <p class="font-bold">元空间</p>
+    <div v-if="current" class=":uno: w-full flex">
+      <div v-if="current.metaspace" class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">元空间</p>
         <p v-text="prettyBytes(current.metaspace)" />
       </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">已用</p>
+      <div class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">已用</p>
         <p v-text="prettyBytes(current.used)" />
       </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">当前可用</p>
+      <div class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">当前可用</p>
         <p v-text="prettyBytes(current.committed)" />
       </div>
-      <div v-if="current.max >= 0" class="flex-1 text-center">
-        <p class="font-bold">最大</p>
+      <div v-if="current.max >= 0" class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">最大</p>
         <p v-text="prettyBytes(current.max)" />
       </div>
     </div>
 
-    <MemChart v-if="chartData.length > 0" :data="chartData" class="mt-2" />
+    <MemChart
+      v-if="chartData.length > 0"
+      :data="chartData"
+      class=":uno: mt-2"
+    />
   </VCard>
 </template>
 <style lang="css" scoped>

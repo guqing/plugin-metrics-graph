@@ -1,16 +1,12 @@
 {
-  "name": "@guching/plugin-metrics-graph",
-  "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "vite build --watch --mode=development",
-    "build": "vite build",
-    "preview": "vite preview --port 4173",
-    "test:unit": "vitest --environment jsdom",
+    "dev": "rsbuild build --watch --env-mode=development",
+    "build": "rsbuild build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@halo-dev/ui-plugin-bundler-kit": "^1.0.0",
     "@halo-dev/components": "^1.5.0",
     "@halo-dev/console-shared": "^2.6.0",
     "axios": "^1.6.2",
@@ -22,29 +18,24 @@
     "vue": "^3.3.4"
   },
   "devDependencies": {
+    "@halo-dev/ui-plugin-bundler-kit": "2.21.1",
     "@iconify/json": "^2.2.76",
+    "@rsbuild/core": "^1.3.22",
     "@rushstack/eslint-patch": "^1.3.1",
-    "@types/jsdom": "^20.0.1",
     "@types/node": "^16.18.35",
-    "@vitejs/plugin-vue": "^3.2.0",
-    "@vitejs/plugin-vue-jsx": "^2.1.1",
+    "@unocss/eslint-config": "^66.2.3",
+    "@unocss/webpack": "^66.2.3",
     "@vue/eslint-config-prettier": "^7.1.0",
     "@vue/eslint-config-typescript": "^11.0.3",
-    "@vue/test-utils": "^2.3.2",
     "@vue/tsconfig": "^0.1.3",
-    "autoprefixer": "^10.4.16",
-    "eslint": "^8.42.0",
+    "eslint": "^8.57.1",
     "eslint-plugin-vue": "^9.14.1",
-    "jsdom": "^19.0.0",
-    "npm-run-all": "^4.1.5",
-    "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "sass": "^1.63.3",
-    "tailwindcss": "^3.3.5",
     "typescript": "~4.7.4",
-    "unplugin-icons": "^0.15.3",
-    "vite": "^4.5.0",
-    "vitest": "^0.24.5",
+    "unocss": "^66.2.3",
+    "unplugin-icons": "^22.1.0",
     "vue-tsc": "^1.6.5"
-  }
+  },
+  "packageManager": "pnpm@10.12.1+sha512.f0dda8580f0ee9481c5c79a1d927b9164f2c478e90992ad268bbb2465a736984391d6333d2c327913578b2804af33474ca554ba29c04a8b13060a717675ae3ac"
 }

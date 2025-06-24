@@ -9,7 +9,7 @@ import { concatMap, timer } from "@/utils/rxjs";
 import { toMillis } from "@/utils/moment";
 import { ref } from "vue";
 
-var props = defineProps({
+const props = defineProps({
   instance: Instance,
 });
 
@@ -60,17 +60,17 @@ const fetchMetrics = async () => {
 </script>
 <template>
   <VCard v-if="hasLoaded" title="垃圾回收">
-    <div v-if="current" class="flex w-full">
-      <div class="flex-1 text-center">
-        <p class="font-bold">总计</p>
+    <div v-if="current" class=":uno: w-full flex">
+      <div class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">总计</p>
         <p v-text="current.count" />
       </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">总耗时</p>
+      <div class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">总耗时</p>
         <p v-text="`${current.total_time.asSeconds().toFixed(4)}s`" />
       </div>
-      <div class="flex-1 text-center">
-        <p class="font-bold">最大耗时</p>
+      <div class=":uno: flex-1 text-center">
+        <p class=":uno: font-bold">最大耗时</p>
         <p v-text="`${current.max.asSeconds().toFixed(4)}s`" />
       </div>
     </div>

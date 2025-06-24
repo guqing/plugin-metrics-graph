@@ -8,8 +8,12 @@ module.exports = {
     "eslint:recommended",
     "@vue/eslint-config-typescript/recommended",
     "@vue/eslint-config-prettier",
+    "@unocss",
   ],
   env: {
     "vue/setup-compiler-macros": true,
+  },
+  rules: {
+    "@unocss/enforce-class-compile": 1,
   },
 };

@@ -1,18 +1,20 @@
 import { definePlugin } from "@halo-dev/console-shared";
-import IndexView from "./views/Index.vue";
-import { markRaw } from "vue";
-import "./styles/tailwind.css";
+import { defineAsyncComponent, markRaw } from "vue";
+import "uno.css";
 import MaterialSymbolsAreaChartOutlineRounded from "~icons/material-symbols/area-chart-outline-rounded";
+import { VLoading } from "@halo-dev/components";
 
 export default definePlugin({
-  components: {},
   routes: [
     {
       parentName: "OverviewRoot",
       route: {
         path: "/metrics",
         name: "Metrics",
-        component: IndexView,
+        component: defineAsyncComponent({
+          loader: () => import("./views/Index.vue"),
+          loadingComponent: VLoading,
+        }),
         meta: {
           title: "指标监控",
           permissions: ["system:actuator:manage"],

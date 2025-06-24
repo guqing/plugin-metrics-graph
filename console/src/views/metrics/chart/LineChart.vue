@@ -97,7 +97,9 @@ const generateLabels = (aChart: Chart) => {
         strokeStyle: style.borderColor,
         lineWidth: 2,
         pointStyle,
+        // @unocss-skip-start
         hidden: !aChart.getDataVisibility(i),
+        // @unocss-skip-end
 
         // Extra data used for toggling the correct item
         index: i,

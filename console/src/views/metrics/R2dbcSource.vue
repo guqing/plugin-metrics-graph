@@ -73,44 +73,44 @@ useSubscription(createSubscription);
 </script>
 <template>
   <VCard v-if="state.hasLoaded" title="R2DBC 数据源">
-    <div class="pmg-grid pmg-grid-cols-8 pmg-gap-4">
-      <div v-if="state.current" class="level datasource-current pmg-col-span-2 pmg-grid pmg-grid-rows-5 pmg-grid-flow-col gap-4">
-        <div class="level-item has-text-centered">
+    <div class=":uno: grid grid-cols-8 gap-4">
+      <div
+        v-if="state.current"
+        class=":uno: level datasource-current col-span-2 grid grid-rows-5 grid-flow-col gap-4"
+      >
+        <div class=":uno: level-item has-text-centered">
           <div>
-            <p class="heading has-bullet has-bullet-info">活动连接数</p>
+            <p class=":uno: heading has-bullet has-bullet-info">活动连接数</p>
             <p v-text="state.current.acquired" />
           </div>
         </div>
-        <div class="level-item has-text-centered">
+        <div class=":uno: level-item has-text-centered">
           <div>
-            <p class="heading">连接总数</p>
+            <p class=":uno: heading">连接总数</p>
             <p v-text="state.current.allocated" />
           </div>
         </div>
-        <div class="level-item has-text-centered">
+        <div class=":uno: level-item has-text-centered">
           <div>
-            <p class="heading">空闲连接数</p>
+            <p class=":uno: heading">空闲连接数</p>
             <p v-text="state.current.idle" />
           </div>
         </div>
-        <div class="level-item has-text-centered">
+        <div class=":uno: level-item has-text-centered">
           <div>
-            <p class="heading">最大连接数</p>
+            <p class=":uno: heading">最大连接数</p>
             <p v-text="state.current.maxAllocated" />
           </div>
         </div>
-        <div class="level-item has-text-centered">
+        <div class=":uno: level-item has-text-centered">
           <div>
-            <p class="heading">当前挂起数</p>
+            <p class=":uno: heading">当前挂起数</p>
             <p v-text="state.current.pending" />
           </div>
         </div>
       </div>
-      <div class="pmg-col-span-6">
-        <R2dbcSoruceChart
-        v-if="chartData.length > 0"
-        :data="chartData"
-      />
+      <div class=":uno: col-span-6">
+        <R2dbcSoruceChart v-if="chartData.length > 0" :data="chartData" />
       </div>
     </div>
   </VCard>

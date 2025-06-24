@@ -13,7 +13,7 @@ const baseUrl = () => {
 };
 
 class Instance {
-  public endpointInitialized: boolean = false;
+  public endpointInitialized = false;
   public endpoints: any[] = [];
   private readonly axios: AxiosInstance;
 
@@ -27,15 +27,13 @@ class Instance {
 
   async detectEndpoints() {
     const response = await this.axios.get(uri`actuator`);
-    var res = response.data;
-    this.endpoints = Object.entries(res["_links"]).map(
-      ([endpoint, link]) => {
-        return {
-          id: endpoint,
-          link: link
-        }
-      }
-    );
+    const res = response.data;
+    this.endpoints = Object.entries(res["_links"]).map(([endpoint, link]) => {
+      return {
+        id: endpoint,
+        link: link,
+      };
+    });
   }
 
   static _toMBeans(data) {

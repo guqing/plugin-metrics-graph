@@ -45,5 +45,5 @@ tasks.named('compileJava').configure {
 }
 
 halo {
-    version = '2.19'
+    version = '2.21'
 }
